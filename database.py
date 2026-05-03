@@ -1,0 +1,16 @@
+import psycopg2
+conn = psycopg2.connect(host='localhost',port=5432,user='postgres',password='Thrill254.',dbname='fruits_db')
+cur = conn.cursor()
+
+def get_deliveries():
+    cur.execute("select * from deliveries")
+    deliveries = cur.fetchall()
+    return deliveries
+
+def insert_deliveries(delivery_details):
+    cur.execute(f"insert into deliveries(items,quantity_required,quantity_delivered,procuring_entity,receiver_name,receiver_contacts)values{delivery_details}")
+    conn.commit()
+
+def insert_user(user_details):
+    cur.execute("insert into users(full_name,email,phone_number,password)values(%s,%s,%s,%s)",user_details)
+    conn.commit()
