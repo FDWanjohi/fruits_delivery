@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %} deliveries {% endblock %}
+{% block content %}
+
+<h4>Deliveries</h4>
+<div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add A Delivery
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Adding a Delivery</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/add_deliveries">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Item Name</label>
+                            <input type="text" name="i_name" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Quantity Required</label>
+                            <input type="number" name="qty_req" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Quantity Delivered</label>
+                            <input type="number" name="qty_delivered" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Procuring Entity</label>
+                            <input type="text" name="proc_entity" class="form-control" id="exampleInputPassword1">
+                        </div>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Receiver Name</label>
+                    <input type="text" name="r_name" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Receiver Contacts</label>
+                <input type="number" name="r_contacts" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3">
+                <label for="message-text" class="col-form-label">Remarks:</label>
+                <textarea class="form-control" id="message-text"></textarea>
+            </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add a Delivery</button>
+            </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<table class="table-dark table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Delivery No.</th>
+            <th scope="col">Item Name</th>
+            <th scope="col">Qty Required</th>
+            <th scope="col">Qty Delivered</th>
+            <th scope="col">Procuring Entity.</th>
+            <th scope="col">Receiver Name</th>
+            <th scope="col">Receiver Contacts</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for deliveries in deliveries_data %}
+        <tr>
+            <td> {{ deliveries[0] }}</td>
+            <td> {{ deliveries[1] }}</td>
+            <td> {{ deliveries[2] }}</td>
+            <td> {{ deliveries[3] }}</td>
+            <td> {{ deliveries[4] }}</td>
+            <td> {{ deliveries[5] }}</td>
+            <td> {{ deliveries[6] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
