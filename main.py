@@ -5,7 +5,7 @@ from functools import wraps
 
 app = Flask(__name__)
 
-brycpt = Bcrypt(app)
+bcrypt = Bcrypt(app)
 
 
 app.secret_key = '99dnjc8uinh8chbw88dnasskls0'
