@@ -31,10 +31,10 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     {% if not session.email %}
-                    <a class="nav-link" href="#">Login</a>
-                    <a class="nav-link" href="#">Register</a>
+                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/register">Register</a>
                     {% else %}
-                    <a class="nav-link active" aria-current="page" href="#">Deliveries</a>
+                    <a class="nav-link active" aria-current="page" href="/deliveries">Deliveries</a>
                     <a class="nav-link" href="/logout">Logout</a>
                     {% endif %}
                 </div>

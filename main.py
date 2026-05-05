@@ -54,7 +54,7 @@ def login():
         if not existing_user:
             flash("User doesn't exist, please register",'danger')
         else:
-            if bcrycpt.check_password_hash(existing_user[-1],password):
+            if bcrypt.check_password_hash(existing_user[-1],password):
                 session['email'] = email
                 flash("Login successful",'success')
                 return redirect(url_for('dashboard'))
