@@ -8,7 +8,7 @@ def get_deliveries():
     return deliveries
 
 def insert_deliveries(delivery_details):
-    cur.execute(f"insert into deliveries(item_name,quantity_required,quantity_delivered,procuring_entity,receiver_name,receiver_contacts)values{delivery_details}")
+    cur.execute("insert into deliveries(item_name,quantity_required,quantity_delivered,procuring_entity,receiver_name,receiver_contacts)values(%s,%s,%s,%s,%s,%s)",delivery_details)
     conn.commit()
 
 def insert_user(user_details):

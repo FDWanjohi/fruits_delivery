@@ -30,7 +30,8 @@ def deliveries():
     return render_template("deliveries.html",deliveries_data = deliveries_data)
 
 
-@app.route('/add_deliveries',methods=['GET','POST'])
+@app.route('/add_deliveries',methods=['POST'])
+@login_required
 def add_deliveries():
     if request.method == 'POST':
         item_name = request.form['i_name']
@@ -44,7 +45,7 @@ def add_deliveries():
         flash("Delivery added successfully",'success')
     return redirect(url_for('deliveries'))
 
-@app.route("/login")
+@app.route('/login',methods=['GET','POST'])
 def login():
     if request.method =='POST':
         email = request.form['email']
@@ -53,18 +54,20 @@ def login():
         existing_user = check_user_exists(email)
         if not existing_user:
             flash("User doesn't exist, please register",'danger')
+            return redirect(url_for('register'))
+
         else:
             if bcrypt.check_password_hash(existing_user[-1],password):
                 session['email'] = email
                 flash("Login successful",'success')
-                return redirect(url_for('dashboard'))
+                return redirect(url_for('deliveries'))
             else:
                 flash("Password incorrect",'danger')
     return render_template("login.html")
 
 
 @app.route('/register',methods=['GET','POST'])
-def regsiter():
+def register():
     if request.method == 'POST':
         full_name = request.form['name']
         email = request.form['email']
@@ -83,9 +86,11 @@ def regsiter():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     session.pop('email',None)
     flash("User logged out successfully","success")
     return redirect(url_for('login'))
 
-app.run(debug=True)
+if __name__=="__main__":
+    app.run(debug=True)
